@@ -1,9 +1,7 @@
+import Router from "./components/Router";
+
 function App() {
-  return (
-    <div>
-      <h1>This is a react app powered by vite. </h1>
-    </div>
-  );
+  return <Router />;
 }
 
 export default App;
