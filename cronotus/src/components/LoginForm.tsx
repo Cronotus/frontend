@@ -46,7 +46,7 @@ const LoginForm = (props: { className: string }) => {
           alignItems: "center",
           display: "flex",
           flexFlow: "column",
-          marginBottom: "49%",
+          marginBottom: "40%",
         }}
       >
         <img
@@ -63,6 +63,7 @@ const LoginForm = (props: { className: string }) => {
           value={formik.values.userName}
           onChange={formik.handleChange("userName")}
           onBlur={formik.handleBlur("userName")}
+          color="primary"
         />
         <TextField
           id="password-field"
@@ -92,10 +93,29 @@ const LoginForm = (props: { className: string }) => {
           id="login-button"
           variant="contained"
           size="large"
-          sx={{ marginTop: "3%", backgroundColor: "black" }}
+          sx={{
+            marginTop: "3%",
+            backgroundColor: "black",
+            "&:hover": { backgroundColor: "#4238DA" },
+          }}
           onClick={submitForm}
         >
           Login
+        </Button>
+        <Button
+          id="register-button"
+          size="medium"
+          sx={{
+            marginTop: "3%",
+            color: "black",
+            "&:hover": {
+              backgroundColor: "#4238DA",
+              color: "white",
+            },
+          }}
+          onClick={() => alert("Register button clicked!")}
+        >
+          Create a new account
         </Button>
       </Box>
     </div>

@@ -2,7 +2,6 @@ import { Box } from "@mui/material";
 import LoginDesign from "../LoginDesign";
 import LoginForm from "../LoginForm";
 import "../../styles/login.css";
-import RobotoRegular from "../../../public/assets/fonts/Roboto-Regular.ttf";
 
 const Login = () => {
   return (
