@@ -8,7 +8,7 @@ const Login = () => {
     <div id="login-page-background">
       <Box
         component={"form"}
-        autoComplete="off"
+        autoComplete="on"
         sx={{
           "& .MuiTextField-root": { m: 1, width: "50ch" },
           flexFlow: "row",

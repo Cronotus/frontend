@@ -8,8 +8,6 @@ import DroneRaceSvg from "/assets/images/undraw_drone_race_-0-sim.svg";
 
 const svgs = [HikingSvg, BaseballSvg, SkateboardSvg, BikeSvg, DroneRaceSvg];
 
-// ... rest of the code
-
 const LoginDesign = (props: {
   className: string;
   headlineTextId: string;

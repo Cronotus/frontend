@@ -4,7 +4,6 @@ import Browser from "./Browser";
 import Profile from "./Profile";
 import NoMatch from "../errors/NoMatch";
 import Layout from "./Layout";
-import Login from "./Login";
 
 const Router = () => {
   return (

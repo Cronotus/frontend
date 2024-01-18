@@ -11,6 +11,7 @@ import { useState } from "react";
 import { loginFetch } from "../services/api/login";
 import { TokenDto } from "../interfaces/in/TokenDto";
 import CronotusLogoSvg from "/assets/logo/svg/logo-black.svg";
+import { Link } from "react-router-dom";
 
 const LoginForm = (props: { className: string }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -102,21 +103,23 @@ const LoginForm = (props: { className: string }) => {
         >
           Login
         </Button>
-        <Button
-          id="register-button"
-          size="medium"
-          sx={{
-            marginTop: "3%",
-            color: "black",
-            "&:hover": {
-              backgroundColor: "#4238DA",
-              color: "white",
-            },
-          }}
-          onClick={() => alert("Register button clicked!")}
-        >
-          Create a new account
-        </Button>
+        <Link to="/register">
+          <Button
+            id="register-button"
+            variant="text"
+            size="medium"
+            sx={{
+              marginTop: "10%",
+              color: "black",
+              "&:hover": {
+                color: "white",
+                backgroundColor: "black",
+              },
+            }}
+          >
+            Create a new account
+          </Button>
+        </Link>
       </Box>
     </div>
   );
