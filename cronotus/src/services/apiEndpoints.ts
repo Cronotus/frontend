@@ -1,0 +1,4 @@
+export const apiEndpoints = {
+  login: `${import.meta.env.VITE_LOCAL_API_URL}/authentication/login`,
+  register: `${import.meta.env.VITE_LOCAL_API_URL}/authentication/register`,
+};
