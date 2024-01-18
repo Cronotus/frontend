@@ -1,9 +1,8 @@
+import AuthRouter from "./components/routes/AuthRouter";
 import Router from "./components/routes/Router";
-import Login from "./components/routes/Login";
 
 function App() {
-  // return <Router />;
-  return <Login />;
+  return true ? <AuthRouter /> : <Router />;
 }
 
 export default App;

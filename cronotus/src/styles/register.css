@@ -1,0 +1,11 @@
+#registration-sequence-block-headline {
+  font-size: 3rem;
+  font-family: Trebuchet MS;
+}
+
+.registration-sequence {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
