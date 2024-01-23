@@ -6,10 +6,12 @@ import { MuiTelInput } from "mui-tel-input";
 import { useFormik } from "formik";
 import { registrationSchema } from "../services/logic/validation";
 import { registerFetch } from "../services/api/register";
+import { useNavigate } from "react-router-dom";
 
 const RegisterLogic = () => {
   const [registrationSequence, setRegistrationSequence] = useState<number>(0);
   const [sendData, setSendData] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -34,11 +36,11 @@ const RegisterLogic = () => {
         .then(() => {
           console.log("Registration was successful!");
           setTimeout(() => {
-            window.location.href = "/login";
+            navigate("/");
           }, 1500);
         })
         .catch(() => {
-          window.location.href = "/login";
+          navigate("/");
           console.log("Registration failed!");
         });
     },
