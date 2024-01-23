@@ -1,6 +1,7 @@
 import { Box, Button } from "@mui/material";
 import "../styles/register.css";
 import { ReactNode } from "react";
+import * as Yup from "yup";
 
 const RegistrationSequenceBlock = (props: {
   className: string;
@@ -9,8 +10,21 @@ const RegistrationSequenceBlock = (props: {
   backButtonId?: string;
   currentSequence: number;
   formContent: ReactNode;
+  formValues: any;
+  validationSchema: Yup.ObjectSchema<any>;
   registrationSequenceSetter: React.Dispatch<React.SetStateAction<number>>;
 }) => {
+  const handleNextClick = () => {
+    props.validationSchema
+      .validate(props.formValues, { abortEarly: false })
+      .then(() => {
+        props.registrationSequenceSetter(props.currentSequence + 1);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className={props.className}>
       <h1 id="registration-sequence-block-headline">
@@ -55,9 +69,7 @@ const RegistrationSequenceBlock = (props: {
               backgroundColor: "black",
               "&:hover": { backgroundColor: "#4238DA" },
             }}
-            onClick={() =>
-              props.registrationSequenceSetter(props.currentSequence + 1)
-            }
+            onClick={handleNextClick}
           >
             Next
           </Button>
@@ -72,9 +84,7 @@ const RegistrationSequenceBlock = (props: {
             backgroundColor: "black",
             "&:hover": { backgroundColor: "#4238DA" },
           }}
-          onClick={() =>
-            props.registrationSequenceSetter(props.currentSequence + 1)
-          }
+          onClick={handleNextClick}
         >
           Next
         </Button>
