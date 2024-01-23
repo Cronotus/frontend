@@ -15,7 +15,7 @@ export const registrationSchema = object().shape({
   email: string().required("Email is required").email("Email should be valid"),
   password: string()
     .required("Password is required")
-    .min(6, "Passwords should be at least 6 characters"),
+    .min(8, "Passwords should be at least 8 characters"),
   confirmPassword: string()
     .required("Password confirmation is required")
     .oneOf([Yup.ref("password")], "Passwords do not match"),

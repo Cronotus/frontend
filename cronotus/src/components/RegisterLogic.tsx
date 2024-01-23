@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RegistrationSequenceBlock from "./RegistrationSequenceBlock";
 import "../styles/register.css";
 import { Box, TextField } from "@mui/material";
 import { MuiTelInput } from "mui-tel-input";
 import { useFormik } from "formik";
 import { registrationSchema } from "../services/logic/validation";
+import { registerFetch } from "../services/api/register";
 
 const RegisterLogic = () => {
   const [registrationSequence, setRegistrationSequence] = useState<number>(0);
+  const [sendData, setSendData] = useState<boolean>(false);
 
   const formik = useFormik({
     initialValues: {
@@ -21,9 +23,32 @@ const RegisterLogic = () => {
     },
     validationSchema: registrationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      return registerFetch({
+        firstName: values.firstName,
+        lastName: values.lastName,
+        userName: values.userName,
+        email: values.email,
+        password: values.password,
+        phoneNumber: values.phoneNumber,
+      })
+        .then(() => {
+          console.log("Registration was successful!");
+          setTimeout(() => {
+            window.location.href = "/login";
+          }, 1500);
+        })
+        .catch(() => {
+          window.location.href = "/login";
+          console.log("Registration failed!");
+        });
     },
   });
+
+  useEffect(() => {
+    if (sendData) {
+      formik.handleSubmit();
+    }
+  }, [sendData]);
 
   switch (registrationSequence) {
     case 0: {
@@ -227,8 +252,6 @@ const RegisterLogic = () => {
       const phoneNumberSchema = registrationSchema.pick(["phoneNumber"]);
       const { phoneNumber } = formik.values;
       const valuesToUse = { phoneNumber };
-
-      console.log(formik.values);
       return (
         <RegistrationSequenceBlock
           className="registration-sequence"
@@ -237,6 +260,7 @@ const RegisterLogic = () => {
           registrationSequenceSetter={setRegistrationSequence}
           validationSchema={phoneNumberSchema}
           formValues={valuesToUse}
+          sendDataSignal={setSendData}
           formContent={
             <Box
               component={"form"}

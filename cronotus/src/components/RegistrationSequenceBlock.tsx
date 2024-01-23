@@ -13,11 +13,15 @@ const RegistrationSequenceBlock = (props: {
   formValues: any;
   validationSchema: Yup.ObjectSchema<any>;
   registrationSequenceSetter: React.Dispatch<React.SetStateAction<number>>;
+  sendDataSignal?: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const handleNextClick = () => {
     props.validationSchema
       .validate(props.formValues, { abortEarly: false })
       .then(() => {
+        if (props.currentSequence + 1 === 5) {
+          props.sendDataSignal!(true);
+        }
         props.registrationSequenceSetter(props.currentSequence + 1);
       })
       .catch((err) => {
