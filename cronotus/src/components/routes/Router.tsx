@@ -5,13 +5,13 @@ import Profile from "./Profile";
 import NoMatch from "../errors/NoMatch";
 import Layout from "./Layout";
 
-const Router = () => {
+const Router = (props: { onLogout: () => void }) => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="browser" element={<Browser />} />
-        <Route path="profile" element={<Profile />} />
+        <Route path="profile" element={<Profile onLogout={props.onLogout} />} />
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>

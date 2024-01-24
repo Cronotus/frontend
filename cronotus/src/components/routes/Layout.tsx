@@ -5,12 +5,22 @@ const Layout = () => {
   return (
     <div>
       <nav className="route-layout">
-        <Link to="/">Home</Link>
-        <Link to="/browser">Browser</Link>
-        <Link to="/profile">Profile</Link>
+        <Link to="/" className="layout-link layout-children">
+          <div>
+            <h1>Home</h1>
+          </div>
+        </Link>
+        <Link to="/browser" className="layout-link layout-children">
+          <div>
+            <h1>Browser</h1>
+          </div>
+        </Link>
+        <Link to="/profile" className="layout-link layout-children">
+          <div>
+            <h1>Profile</h1>
+          </div>
+        </Link>
       </nav>
-
-      <hr />
       <Outlet />
     </div>
   );
