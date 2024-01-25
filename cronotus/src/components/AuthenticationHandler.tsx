@@ -36,7 +36,6 @@ const AuthenticationHandler = () => {
     navigate("/");
   };
 
-  console.log(isLoggedIn);
   return !isLoggedIn ? (
     <AuthRouter onLogin={handleLogin} />
   ) : (
