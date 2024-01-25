@@ -3,7 +3,7 @@ import LoginDesign from "../LoginDesign";
 import LoginForm from "../LoginForm";
 import "../../styles/login.css";
 
-const Login = () => {
+const Login = (props: { onLogin: () => void }) => {
   return (
     <div id="login-page-background">
       <Box
@@ -70,7 +70,7 @@ const Login = () => {
           svgId="login-svg"
           activityName="activity-name"
         />
-        <LoginForm className="form-inputs" />
+        <LoginForm className="form-inputs" onLogin={props.onLogin} />
       </Box>
     </div>
   );

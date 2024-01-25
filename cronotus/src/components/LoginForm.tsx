@@ -13,7 +13,7 @@ import { TokenDto } from "../interfaces/in/TokenDto";
 import CronotusLogoSvg from "/assets/logo/svg/logo-black.svg";
 import { Link } from "react-router-dom";
 
-const LoginForm = (props: { className: string }) => {
+const LoginForm = (props: { className: string; onLogin: () => void }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const formik = useFormik({
@@ -29,9 +29,8 @@ const LoginForm = (props: { className: string }) => {
         .then((res) => res as unknown as TokenDto)
         .then((tokens) => {
           localStorage.setItem("accessToken", tokens.accessToken);
-          localStorage.setItem("refreshToken", tokens.refreshToken);
-          alert("Login was successful!");
         })
+        .then(() => props.onLogin())
         .catch(() => alert("Login failed!"));
     },
   });

@@ -34,14 +34,12 @@ const RegisterLogic = () => {
         phoneNumber: values.phoneNumber,
       })
         .then(() => {
-          console.log("Registration was successful!");
           setTimeout(() => {
             navigate("/");
           }, 1500);
         })
         .catch(() => {
           navigate("/");
-          console.log("Registration failed!");
         });
     },
   });
