@@ -4,10 +4,16 @@ import * as Yup from "yup";
 export const registrationSchema = object().shape({
   firstName: string()
     .required("First name is required")
-    .matches(/^[a-zA-Z]+$/, "First name should not have special characters"),
+    .matches(
+      /^[a-zA-ZÀ-ÖØ-öø-ÿ]+$/,
+      "First name should not have special characters"
+    ),
   lastName: string()
     .required("Last name is required")
-    .matches(/^[a-zA-Z]+$/, "Last name should not have special characters"),
+    .matches(
+      /^[a-zA-ZÀ-ÖØ-öø-ÿ]+$/,
+      "Last name should not have special characters"
+    ),
   userName: string()
     .required("Username is required")
     .min(3, "Username should be at least 3 characters")
@@ -29,10 +35,16 @@ export const registrationSchema = object().shape({
 export const profileEditSchema = object().shape({
   firstName: string()
     .required("First name is required")
-    .matches(/^[a-zA-Z]+$/, "First name should not have special characters"),
+    .matches(
+      /^[a-zA-ZÀ-ÖØ-öø-ÿ]+$/,
+      "First name should not have special characters"
+    ),
   lastName: string()
     .required("Last name is required")
-    .matches(/^[a-zA-Z]+$/, "Last name should not have special characters"),
+    .matches(
+      /^[a-zA-ZÀ-ÖØ-öø-ÿ]+$/,
+      "Last name should not have special characters"
+    ),
   userName: string()
     .required("Username is required")
     .min(3, "Username should be at least 3 characters")

@@ -34,11 +34,15 @@ const RegisterLogic = () => {
         phoneNumber: values.phoneNumber,
       })
         .then(() => {
+          // TODO: Give some info back to the user that the registration was successful
+          // Do it this way: Register ok -> Show that register ok -> Redirect to login (after delay)
           setTimeout(() => {
             navigate("/");
           }, 1500);
         })
         .catch(() => {
+          // TODO: Give some info back to the user that the registration failed
+          // Do it this way: Register failed -> Show that register failed -> Redirect to login (after delay)
           navigate("/");
         });
     },
