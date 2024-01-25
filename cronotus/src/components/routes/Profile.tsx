@@ -2,38 +2,29 @@ import "../../styles/profile.css";
 import ProfileHead from "../ProfileHead";
 import PorfileMyInformation from "../ProfilMyInformation";
 import { deleteProfileFetch, useProfile } from "../../services/api/profile";
-import { JwtPayload, jwtDecode } from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import { Box, Button, Modal, Typography } from "@mui/material";
 import { useState } from "react";
 import ProfileEdit from "../ProfileEdit";
-
-interface CustomJwtPayload extends JwtPayload {
-  "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": string;
-}
-
-const modalBoxStyle = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "30vw",
-  height: "fit-content",
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  p: 4,
-  borderRadius: "15px",
-};
+import { CustomJwtPayload } from "../../interfaces/CustomJwtPayload";
+import {
+  deleteProfileAnswerButtonStyle,
+  deleteProfileButtonStyle,
+  editProfileButtonStyle,
+  logoutButtonStyle,
+  modalBoxStyle,
+} from "../../styles/profileStyles";
 
 const Profile = (props: { onLogout: () => void }) => {
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [deleteProfileModal, setDeleteProfileModal] = useState<boolean>(false);
 
   const token = localStorage.getItem("accessToken");
+  const profileIdKeyName = import.meta.env.VITE_LOCAL_JWT_TOKEN_ID_KEY;
+
   const decodedToken = token ? jwtDecode<CustomJwtPayload>(token) : null;
-  const userId =
-    decodedToken?.[
-      "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
-    ];
+
+  const userId = decodedToken?.[profileIdKeyName];
 
   const { data: profileInfo, isLoading, error, mutate } = useProfile(userId!);
 
@@ -75,42 +66,21 @@ const Profile = (props: { onLogout: () => void }) => {
         <Button
           className="profile-delete-button"
           onClick={() => setDeleteProfileModal(!deleteProfileModal)}
-          sx={{
-            ":hover": { backgroundColor: "#2f2e41", color: "white" },
-            backgroundColor: "#f0f0f0",
-            borderRadius: "5px",
-            fontSize: "1.03rem",
-            color: "black",
-            marginBottom: "2vh",
-          }}
+          sx={deleteProfileButtonStyle}
         >
           Delete profile
         </Button>
         <Button
           className="profile-edit-button"
           onClick={() => setIsEditingProfile(!isEditingProfile)}
-          sx={{
-            ":hover": { backgroundColor: "#2f2e41", color: "white" },
-            backgroundColor: "#f0f0f0",
-            borderRadius: "5px",
-            fontSize: "1.03rem",
-            color: "black",
-            marginBottom: "2vh",
-          }}
+          sx={editProfileButtonStyle}
         >
           Edit profile
         </Button>
         <Button
           className="profile-logout-button"
           onClick={props.onLogout}
-          sx={{
-            ":hover": { backgroundColor: "#2f2e41", color: "white" },
-            backgroundColor: "#f0f0f0",
-            borderRadius: "5px",
-            fontSize: "1.03rem",
-            color: "black",
-            marginBottom: "2vh",
-          }}
+          sx={logoutButtonStyle}
         >
           Log out
         </Button>
@@ -131,28 +101,14 @@ const Profile = (props: { onLogout: () => void }) => {
                   );
                   props.onLogout();
                 }}
-                sx={{
-                  ":hover": { backgroundColor: "#2f2e41", color: "white" },
-                  backgroundColor: "#f0f0f0",
-                  borderRadius: "5px",
-                  fontSize: "1.03rem",
-                  color: "black",
-                  marginTop: "3.5vh",
-                }}
+                sx={deleteProfileAnswerButtonStyle}
               >
                 Yes
               </Button>
               <Button
                 className="profile-delete-button-no"
                 onClick={() => setDeleteProfileModal(false)}
-                sx={{
-                  ":hover": { backgroundColor: "#2f2e41", color: "white" },
-                  backgroundColor: "#f0f0f0",
-                  borderRadius: "5px",
-                  fontSize: "1.03rem",
-                  color: "black",
-                  marginTop: "3.5vh",
-                }}
+                sx={deleteProfileAnswerButtonStyle}
               >
                 No
               </Button>
