@@ -1,8 +1,8 @@
 import { LoginCredentialsDto } from "../../interfaces/out/LoginCredentialsDto";
 import { apiEndpoints } from "../apiEndpoints";
-import { fetchPost } from "../fetchWithMethod";
+import { fetchForAuthentication } from "../fetchForAuthentication";
 
 export const loginFetch = (credentials: LoginCredentialsDto) => {
-  const response = fetchPost(apiEndpoints.login, credentials);
+  const response = fetchForAuthentication(apiEndpoints.login, credentials);
   return response;
 };

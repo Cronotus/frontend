@@ -1,4 +1,5 @@
 import { FetchOptions } from "../interfaces/FetchOptions";
+import { checkForTokens } from "./provideTokens";
 
 export const fetchWithMethod = async <T>(
   methodName: string,
@@ -6,7 +7,7 @@ export const fetchWithMethod = async <T>(
   data?: T,
   contentType = "application/json"
 ): Promise<T> => {
-  const token = localStorage.getItem("accessToken");
+  const { accessToken } = checkForTokens();
 
   switch (methodName) {
     case "PATCH": {
@@ -24,7 +25,7 @@ export const fetchWithMethod = async <T>(
       const fetchOptions: FetchOptions = {
         headers: {
           "Content-Type": "application/json-patch+json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
         method: methodName,
         body: JSON.stringify(arrayOfPatches),
@@ -51,7 +52,7 @@ export const fetchWithMethod = async <T>(
       const fetchOptions: FetchOptions = {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
         method: methodName,
       };
@@ -76,7 +77,7 @@ export const fetchWithMethod = async <T>(
       const fetchOptions: FetchOptions = {
         headers: {
           "Content-Type": contentType,
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
         method: methodName,
         body: data

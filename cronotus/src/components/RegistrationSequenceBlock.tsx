@@ -41,7 +41,7 @@ const RegistrationSequenceBlock = (props: {
       {props.formContent}
 
       {props.currentSequence > 0 ? (
-        <Box sx={registrationSequenceBlockButtonStyles}>
+        <Box sx={registrationSequenceBlockBoxStyles}>
           <Button
             id={props.backButtonId}
             variant="contained"
