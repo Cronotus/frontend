@@ -1,8 +1,8 @@
 import { UserForRegistrationDto } from "../../interfaces/out/UserForRegistrationDto";
 import { apiEndpoints } from "../apiEndpoints";
-import { fetchPost } from "../fetchWithMethod";
+import { fetchForAuthentication } from "../fetchForAuthentication";
 
 export const registerFetch = (credentials: UserForRegistrationDto) => {
-  const response = fetchPost(apiEndpoints.register, credentials);
+  const response = fetchForAuthentication(apiEndpoints.register, credentials);
   return response;
 };

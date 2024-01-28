@@ -29,6 +29,7 @@ const LoginForm = (props: { className: string; onLogin: () => void }) => {
         .then((res) => res as unknown as TokenDto)
         .then((tokens) => {
           localStorage.setItem("accessToken", tokens.accessToken);
+          localStorage.setItem("refreshToken", tokens.refreshToken);
         })
         .then(() => props.onLogin())
         .catch(() => alert("Login failed!"));

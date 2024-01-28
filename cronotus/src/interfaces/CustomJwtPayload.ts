@@ -7,3 +7,7 @@ interface CustomJwtPayloadBase {
 export type CustomJwtPayload = CustomJwtPayloadBase & {
   [K in typeof JWT_TOKEN_ID_KEY]: string;
 };
+
+export interface TokenWithExpiration {
+  exp: number;
+}

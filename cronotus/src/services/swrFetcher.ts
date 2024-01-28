@@ -1,15 +1,17 @@
+import { checkForTokens } from "./provideTokens";
+
 export default async function swrFetcher(
   path: string,
   query: string | undefined
 ) {
-  const url: string = query ? `${path}?${query}` : path;
+  const { accessToken } = checkForTokens();
 
-  const token = localStorage.getItem("accessToken") as string;
+  const url: string = query ? `${path}?${query}` : path;
   const fetchConfigs = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${accessToken}`,
     },
   };
 
