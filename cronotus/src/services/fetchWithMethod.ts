@@ -5,7 +5,7 @@ export const fetchWithMethod = async <T>(
   methodName: string,
   url: string,
   data?: T,
-  contentType = "application/json"
+  contentType = "application/json",
 ): Promise<T> => {
   const { accessToken } = checkForTokens();
 

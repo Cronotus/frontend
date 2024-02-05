@@ -2,7 +2,7 @@ import { checkForTokens } from "./provideTokens";
 
 export default async function swrFetcher(
   path: string,
-  query: string | undefined
+  query: string | undefined,
 ) {
   const { accessToken } = checkForTokens();
 

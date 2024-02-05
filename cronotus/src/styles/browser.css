@@ -1,0 +1,83 @@
+.browser-main-holder {
+  background-color: white;
+  width: auto;
+  min-height: 80vh;
+  max-height: fit-content;
+  margin: 3vh;
+  border-radius: 20px;
+  display: flex;
+  padding: 2vh;
+  flex-direction: column;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-top: 0;
+}
+
+.browser-header {
+  background-color: #f0f0f0;
+  width: 98%;
+  position: relative;
+  border-radius: 0 0 20px 20px;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+.browser-body {
+  background-color: #f0f0f0;
+  margin-top: 2vh;
+  height: fit-content;
+  width: 100%;
+  position: relative;
+  border-radius: 20px;
+  padding-top: 0.8%;
+  padding-bottom: 1%;
+  display: flex;
+  flex-direction: column;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.events-detail-body {
+  background-color: #f0f0f0;
+  margin-top: 2vh;
+  height: fit-content;
+  width: 98%;
+  position: relative;
+  border-radius: 20px;
+  padding-top: 0.8%;
+  padding-bottom: 1%;
+  display: flex;
+  flex-direction: column;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+.events-detail-body h2 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.event-preview:hover {
+  background-color: #cfcfcf;
+  transition: background-color 0.3s ease;
+}
+
+.event-preview {
+  width: 100%;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+.event-preview-link {
+  text-decoration: none;
+  color: black;
+
+  width: 98%;
+}
