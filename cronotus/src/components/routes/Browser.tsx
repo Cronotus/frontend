@@ -1,12 +1,9 @@
 import "../../styles/browser.css";
 import { EventPreview } from "../EventPreview";
-import { useState } from "react";
 import { useEventPreviews } from "../../services/api/events";
 import { Link } from "react-router-dom";
 
 const Browser = () => {
-  const [eventInDetail, setEventInDetail] = useState<string | null>(null);
-
   const { data: eventPreviews, isLoading, error } = useEventPreviews();
 
   if (isLoading) {
@@ -21,7 +18,22 @@ const Browser = () => {
     <>
       <div className="browser-main-holder">
         <div className="browser-header">
-          <h1>See what others are up to</h1>
+          <Link
+            id="browser-link"
+            to={{
+              pathname: "/browser",
+            }}
+          >
+            <h1>See what others are up to</h1>
+          </Link>
+          <Link
+            id="browser-link"
+            to={{
+              pathname: "/create-event",
+            }}
+          >
+            <h1>Create a new event</h1>
+          </Link>
         </div>
         <div className="browser-body">
           {eventPreviews!.length === 0 && (

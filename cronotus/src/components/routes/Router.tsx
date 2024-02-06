@@ -5,6 +5,7 @@ import Profile from "./Profile";
 import NoMatch from "../errors/NoMatch";
 import Layout from "./Layout";
 import { SportsEvent } from "./Event";
+import { CreateEvent } from "./CreateEvent";
 
 const Router = (props: { onLogout: () => void }) => {
   return (
@@ -12,6 +13,7 @@ const Router = (props: { onLogout: () => void }) => {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="browser" element={<Browser />} />
+        <Route path="create-event" element={<CreateEvent />} />
         <Route path="event/:id" element={<SportsEvent />} />
         <Route path="profile" element={<Profile onLogout={props.onLogout} />} />
         <Route path="*" element={<NoMatch />} />

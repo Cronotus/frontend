@@ -2,11 +2,25 @@ import { useParams } from "react-router-dom";
 import { useEventDetail } from "../../services/api/events";
 import "../../styles/browser.css";
 import { formatDate } from "../../services/logic/formatDateForEvent";
+import { useSport } from "../../services/api/sport";
 
 export const SportsEvent = () => {
   let { id } = useParams();
 
   const { data: eventData, isLoading, error } = useEventDetail(id!);
+  const {
+    data: sports,
+    isLoading: sportsLoading,
+    error: sportsError,
+  } = useSport(eventData?.sportId!);
+
+  if (sportsLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (sportsError) {
+    return <div>Something went wrong...</div>;
+  }
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -32,8 +46,7 @@ export const SportsEvent = () => {
         <p>- {formatDate(eventData?.startDate!)}</p>
 
         <h2>What will be played?</h2>
-        <p>- {eventData?.sportId}</p>
-        {/* TODO: Query the right sport name and show it here. */}
+        <p>- {sports?.name}</p>
 
         <h2>How many of us can play at max?</h2>
         <p>- {eventData?.capacity}</p>

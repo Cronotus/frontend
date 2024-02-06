@@ -4,4 +4,6 @@ export const apiEndpoints = {
   profile: `${import.meta.env.VITE_LOCAL_API_URL}/profile`,
   token: `${import.meta.env.VITE_LOCAL_API_URL}/token/refresh`,
   events: `${import.meta.env.VITE_LOCAL_API_URL}/event`,
+  sport: `${import.meta.env.VITE_LOCAL_API_URL}/sport`,
+  organizer: `${import.meta.env.VITE_LOCAL_API_URL}/organizer`,
 };
