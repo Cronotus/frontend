@@ -5,6 +5,7 @@ export interface EventForDetail {
   description: string;
   location: string;
   startDate: string;
+  signedUpPlayers: number;
   capacity: number;
   isEnded: boolean;
 }

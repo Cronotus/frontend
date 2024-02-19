@@ -77,6 +77,58 @@
   margin-top: 3vh;
 }
 
+.profile-myevents {
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  flex-flow: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: start;
+  margin-top: 3vh;
+  padding-bottom: 3vh;
+}
+
+.profile-events-not-organizer {
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  flex-flow: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: start;
+  margin-top: 3vh;
+  padding: 3vh;
+  padding-left: 2vh;
+}
+
+.profile-events-header {
+  padding: 2vh;
+  padding-bottom: 0;
+  padding-top: 1vh;
+}
+
+.profile-events-single {
+  width: 96%;
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+}
+
+.profile-events-single:hover {
+  background-color: #cfcfcf;
+  transition: background-color 0.3s ease;
+}
+
+.profile-events-list {
+  width: 100%;
+}
+
 .profile-infobox-holder {
   margin-bottom: 1vh;
 }

@@ -1,3 +1,4 @@
+import { EventForPreview } from "../../interfaces/in/EventForPreview";
 import { ProfileInformation } from "../../interfaces/in/ProfileInformation";
 import { apiEndpoints } from "../apiEndpoints";
 import { fetchDelete, fetchPatch } from "../fetchWithMethod";
@@ -21,6 +22,11 @@ export const updateProfileFetch = (
 export const deleteProfileFetch = (id: string) => {
   const url = `${apiEndpoints.profile}/${id}`;
   return fetchDelete(url);
+};
+
+export const useProfileEvents = (organizerId: string) => {
+  const url = `${apiEndpoints.organizer}/${organizerId}/events`;
+  return useFetchWithSwr<EventForPreview[]>(url);
 };
 
 export default useProfile;

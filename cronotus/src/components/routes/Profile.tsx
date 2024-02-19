@@ -14,17 +14,27 @@ import {
   logoutButtonStyle,
   modalBoxStyle,
 } from "../../styles/profileStyles";
+import { ProfileMyEvents } from "../ProfileMyEvents";
+import { checkForTokens } from "../../services/provideTokens";
+import { useNavigate } from "react-router-dom";
 
 const Profile = (props: { onLogout: () => void }) => {
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [deleteProfileModal, setDeleteProfileModal] = useState<boolean>(false);
 
-  const token = localStorage.getItem("accessToken");
+  const navigate = useNavigate();
+
+  const { accessToken } = checkForTokens();
+
   const profileIdKeyName = import.meta.env.VITE_LOCAL_JWT_TOKEN_ID_KEY;
 
-  const decodedToken = token ? jwtDecode<CustomJwtPayload>(token) : null;
+  const decodedToken = accessToken
+    ? jwtDecode<CustomJwtPayload>(accessToken as string)
+    : null;
 
   const userId = decodedToken?.[profileIdKeyName];
+  const organizerId =
+    (decodedToken?.["OrganizerNameIdentifier"] as string) || null;
 
   const { data: profileInfo, isLoading, error, mutate } = useProfile(userId!);
 
@@ -48,6 +58,36 @@ const Profile = (props: { onLogout: () => void }) => {
             profileInformation={profileInfo!}
             className="profile-myinfos"
           />
+          {organizerId ? (
+            <ProfileMyEvents
+              className="profile-myevents"
+              organizerId={organizerId}
+            />
+          ) : (
+            <div className="profile-events-not-organizer">
+              <h3>Looks like you haven't organized anything yet.</h3>
+              <Button
+                className="profile-events-not-organizer-button"
+                onClick={() =>
+                  navigate("/create-event", {
+                    replace: true,
+                    state: { from: "/profile" },
+                  })
+                }
+                sx={{
+                  ":hover": { backgroundColor: "#f0f0f0", color: "black" },
+                  backgroundColor: "#2f2e41",
+                  borderRadius: "5px",
+                  fontSize: "0.9rem",
+                  color: "white",
+                  marginBottom: "2vh",
+                  display: "flex",
+                }}
+              >
+                Start organizing today
+              </Button>
+            </div>
+          )}
         </div>
       ) : (
         <div className="profile-main-first-column">
@@ -61,7 +101,6 @@ const Profile = (props: { onLogout: () => void }) => {
           />
         </div>
       )}
-      <div className="profile-main-first-column"></div>
       <div className="profile-main-second-column">
         <Button
           className="profile-delete-button"

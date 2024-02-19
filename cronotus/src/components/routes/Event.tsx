@@ -50,6 +50,9 @@ export const SportsEvent = () => {
 
         <h2>How many of us can play at max?</h2>
         <p>- {eventData?.capacity}</p>
+
+        <h2>How many players signed up so far?</h2>
+        <p>- {eventData?.signedUpPlayers}</p>
       </div>
     </div>
   );
