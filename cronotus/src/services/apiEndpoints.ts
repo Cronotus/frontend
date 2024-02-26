@@ -6,4 +6,5 @@ export const apiEndpoints = {
   events: `${import.meta.env.VITE_LOCAL_API_URL}/event`,
   sport: `${import.meta.env.VITE_LOCAL_API_URL}/sport`,
   organizer: `${import.meta.env.VITE_LOCAL_API_URL}/organizer`,
+  player: `${import.meta.env.VITE_LOCAL_API_URL}/player`,
 };
