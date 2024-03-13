@@ -1,4 +1,4 @@
-import { Link, json, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/browser.css";
 import { useFormik } from "formik";
 import {
@@ -14,10 +14,12 @@ import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs, { Dayjs } from "dayjs";
 import { eventCreationSchema } from "../../services/logic/validation";
-import { checkIfOrganizer } from "../../services/checkIfOrganizer";
 import { createEventFetch } from "../../services/api/events";
+import { useState } from "react";
+import { getOrganizerIdFromToken } from "../../services/logic/getOrganizerIdFromToken";
 
 export const CreateEvent = () => {
+  const [organizerId, setOrganizerId] = useState("");
   const navigate = useNavigate();
 
   const { data: sports, isLoading, error } = useSports();
@@ -34,18 +36,15 @@ export const CreateEvent = () => {
       isEnded: false,
     },
     onSubmit: async (values) => {
-      try {
-        const { organizerId } = (await checkIfOrganizer()) || {
-          organizerId: "",
-        };
-        values.organizerId = organizerId;
-        values.startDate = dayjs(values.startDate).toISOString();
+      const { organizerId } = await getOrganizerIdFromToken();
 
-        await createEventFetch(values);
-        navigate("/browser");
-      } catch (err) {
-        console.error(`There was an error in onSubmit: ${err}`);
-      }
+      values.organizerId = organizerId;
+      createEventFetch(values)
+        .then(() => navigate("/browser"))
+        .catch((err) => {
+          console.log(err);
+          alert("Could not create event");
+        });
     },
     validationSchema: eventCreationSchema,
   });
