@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import RegistrationSequenceBlock from "./RegistrationSequenceBlock";
 import "../styles/register.css";
-import { Box, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { MuiTelInput } from "mui-tel-input";
 import { useFormik } from "formik";
 import { registrationSchema } from "../services/logic/validation";
 import { registerFetch } from "../services/api/register";
 import { useNavigate } from "react-router-dom";
+import { registrationSequenceBlockButtonStyles } from "../styles/registerStyles";
 
 const RegisterLogic = () => {
   const [registrationSequence, setRegistrationSequence] = useState<number>(0);
@@ -34,16 +35,10 @@ const RegisterLogic = () => {
         phoneNumber: values.phoneNumber,
       })
         .then(() => {
-          // TODO: Give some info back to the user that the registration was successful
-          // Do it this way: Register ok -> Show that register ok -> Redirect to login (after delay)
-          setTimeout(() => {
-            navigate("/");
-          }, 1500);
+          setRegistrationSequence(5);
         })
         .catch(() => {
-          // TODO: Give some info back to the user that the registration failed
-          // Do it this way: Register failed -> Show that register failed -> Redirect to login (after delay)
-          navigate("/");
+          setRegistrationSequence(6);
         });
     },
   });
@@ -295,6 +290,55 @@ const RegisterLogic = () => {
             </Box>
           }
         />
+      );
+    }
+
+    case 5: {
+      return (
+        <div className="register-success-div">
+          <h1>Welcome among the players!</h1>
+          <Button
+            className="register-success-button"
+            variant="contained"
+            size="large"
+            onClick={() => navigate("/")}
+            sx={registrationSequenceBlockButtonStyles}
+          >
+            Log in to your new account!
+          </Button>
+        </div>
+      );
+    }
+
+    case 6: {
+      return (
+        <div className="register-fail-div">
+          <h1>Something went wrong...</h1>
+          <Button
+            variant="contained"
+            size="large"
+            onClick={() => navigate("/")}
+            sx={registrationSequenceBlockButtonStyles}
+          >
+            Back to login
+          </Button>
+        </div>
+      );
+    }
+
+    default: {
+      return (
+        <div className="register-fail-div">
+          <h1>Something went wrong...</h1>
+          <Button
+            variant="contained"
+            size="large"
+            onClick={() => navigate("/")}
+            sx={registrationSequenceBlockButtonStyles}
+          >
+            Back to login
+          </Button>
+        </div>
       );
     }
   }

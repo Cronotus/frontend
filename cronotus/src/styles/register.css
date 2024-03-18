@@ -9,3 +9,17 @@
   display: flex;
   flex-direction: column;
 }
+
+.register-fail-div {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-success-div {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
