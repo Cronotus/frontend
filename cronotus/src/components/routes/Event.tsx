@@ -2,30 +2,19 @@ import { useParams } from "react-router-dom";
 import { useEventDetail } from "../../services/api/events";
 import "../../styles/browser.css";
 import { formatDate } from "../../services/logic/formatDateForEvent";
-import { useSport } from "../../services/api/sport";
+import { EventTitleLoading } from "../loadings/EventTitleLoading";
+import { EventLoading } from "../loadings/EventLoading";
+import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import TodayOutlinedIcon from "@mui/icons-material/TodayOutlined";
+import SportsVolleyballOutlinedIcon from "@mui/icons-material/SportsVolleyballOutlined";
+import Groups3OutlinedIcon from "@mui/icons-material/Groups3Outlined";
+import EmojiPeopleOutlinedIcon from "@mui/icons-material/EmojiPeopleOutlined";
 
 export const SportsEvent = () => {
   const { id } = useParams();
 
   const { data: eventData, isLoading, error } = useEventDetail(id!);
-
-  const {
-    data: sports,
-    isLoading: sportsLoading,
-    error: sportsError,
-  } = useSport(eventData?.sportId!);
-
-  if (sportsLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (sportsError) {
-    return <div>Something went wrong...</div>;
-  }
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   if (error) {
     return <div>Something went wrong...</div>;
@@ -33,27 +22,57 @@ export const SportsEvent = () => {
 
   return (
     <div className="browser-main-holder">
-      <div className="browser-header">
-        <h1>{eventData?.name}</h1>
-      </div>
+      {isLoading ? (
+        <EventTitleLoading />
+      ) : (
+        <div className="browser-header">
+          <h1>{eventData?.name}</h1>
+        </div>
+      )}
+
       <div className="events-detail-body">
-        <h2>What the organizers say:</h2>
-        <p>- {eventData?.description}</p>
+        {isLoading ? (
+          <EventLoading />
+        ) : (
+          <>
+            <div className="events-detail-body-description">
+              <DescriptionOutlinedIcon sx={{ marginRight: "1vh" }} />
+              <h3>{eventData?.description}</h3>
+            </div>
 
-        <h2>Where will we play?</h2>
-        <p>- {eventData?.location}</p>
+            <div className="events-detail-body-description">
+              <LocationOnOutlinedIcon sx={{ marginRight: "1vh" }} />
+              <h3>{eventData?.location}</h3>
+            </div>
 
-        <h2>When will we play?</h2>
-        <p>- {formatDate(eventData?.startDate!)}</p>
+            <div className="events-detail-body-description">
+              <TodayOutlinedIcon sx={{ marginRight: "1vh" }} />
+              <h3>{formatDate(eventData?.startDate!)}</h3>
+            </div>
 
-        <h2>What will be played?</h2>
-        <p>- {sports?.name}</p>
+            <div className="events-detail-body-description">
+              <SportsVolleyballOutlinedIcon sx={{ marginRight: "1vh" }} />
+              <h3>{eventData?.sportName}</h3>
+            </div>
 
-        <h2>How many of us can play at max?</h2>
-        <p>- {eventData?.capacity}</p>
-
-        <h2>How many players signed up so far?</h2>
-        <p>- {eventData?.signedUpPlayers}</p>
+            {(((eventData?.signedUpPlayers as unknown as number) <
+              eventData?.capacity!) as unknown as number) ? (
+              <div className="events-detail-body-description">
+                <EmojiPeopleOutlinedIcon sx={{ marginRight: "1vh" }} />
+                <h3>
+                  {eventData?.signedUpPlayers} / {eventData?.capacity}
+                </h3>
+              </div>
+            ) : (
+              <div className="events-detail-body-description">
+                <Groups3OutlinedIcon sx={{ marginRight: "1vh" }} />
+                <h3>
+                  {eventData?.signedUpPlayers} / {eventData?.capacity}
+                </h3>
+              </div>
+            )}
+          </>
+        )}
       </div>
     </div>
   );

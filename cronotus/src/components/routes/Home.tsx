@@ -1,5 +1,5 @@
 import "../../styles/home.css";
-import HomeSvg from "../../../public/assets/images/undraw_in_love_6sq2.svg";
+import HomeSvg from "/assets/images/undraw_in_love_6sq2.svg";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
@@ -18,7 +18,7 @@ const Home = () => {
         <div className="home-body-holder">
           <div className="home-body-left">
             <div className="home-body-description">
-              <h1>Together we</h1>
+              <h1>Together&nbsp;we</h1>
               <h1 className="home-body-keyword">&nbsp;play.&nbsp;</h1>
               <h1>We</h1>
               <h1 className="home-body-keyword">&nbsp;discover.&nbsp;</h1>
@@ -39,11 +39,11 @@ const Home = () => {
                   navigate("/browser", { state: { from: "home" } })
                 }
                 sx={{
-                  ":hover": { backgroundColor: "#f0f0f0", color: "black" },
-                  backgroundColor: "#2f2e41",
+                  ":hover": { backgroundColor: "#2f2e41", color: "white" },
+                  backgroundColor: "#f0f0f0",
                   borderRadius: "5px",
                   fontSize: "1rem",
-                  color: "white",
+                  color: "black",
                   marginBottom: "2vh",
                   display: "flex",
                 }}

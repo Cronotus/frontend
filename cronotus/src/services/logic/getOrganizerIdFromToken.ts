@@ -5,6 +5,7 @@ import { checkIfOrganizer } from "./checkIfOrganizer";
 import { createOrganizerFetch } from "../api/organizer";
 import { OrganizerInformation } from "../../interfaces/in/OrganizerInformation";
 import { tokenRefreshFetch } from "../api/token";
+import { TokenDto } from "../../interfaces/in/TokenDto";
 
 export const getOrganizerIdFromToken = (): Promise<{ organizerId: string }> => {
   return new Promise((resolve, reject) => {
@@ -29,16 +30,11 @@ export const getOrganizerIdFromToken = (): Promise<{ organizerId: string }> => {
       .then((res) => {
         resolve({ organizerId: res.id });
       })
-      .then(() => {
-        tokenRefreshFetch({
-          accessToken: accessToken as string,
-          refreshToken: localStorage.getItem("refreshToken") as string,
-        });
-      })
-      .catch(() => {
+      .catch((err) => {
         console.error(
           `Could not register user as organizer in getOrganizerIdFromToken`
         );
+        console.error(err);
         reject({ organizerId: "" });
       });
   });

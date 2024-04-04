@@ -1,0 +1,19 @@
+.no-match {
+  background-color: white;
+  width: auto;
+  min-height: 80vh;
+  max-height: fit-content;
+  margin: 3vh;
+  border-radius: 20px;
+  display: flex;
+  padding: 2vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-match img {
+  width: 30%;
+  height: 30%;
+  margin: 2vh;
+}

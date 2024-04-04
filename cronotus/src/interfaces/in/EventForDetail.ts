@@ -1,6 +1,7 @@
 export interface EventForDetail {
   id: string;
   sportId: string;
+  sportName: string;
   name: string;
   description: string;
   location: string;

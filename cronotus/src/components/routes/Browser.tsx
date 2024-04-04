@@ -2,6 +2,7 @@ import "../../styles/browser.css";
 import { EventPreview } from "../EventPreview";
 import { useEventPreviews } from "../../services/api/events";
 import { Link } from "react-router-dom";
+import { EventPreviewLoading } from "../loadings/EventPreviewLoading";
 
 const Browser = () => {
   const { data: eventPreviews, isLoading, error } = useEventPreviews();
@@ -36,20 +37,23 @@ const Browser = () => {
           </Link>
         </div>
         <div className="browser-body">
-          {eventPreviews!.length === 0 && (
-            <h1>Looks like there's nothing going on currently</h1>
+          {isLoading ? (
+            <>
+              <EventPreviewLoading />
+            </>
+          ) : (
+            eventPreviews!.map((eventPreview) => (
+              <Link
+                className="event-preview-link"
+                to={{
+                  pathname: `/event/${eventPreview.id}`,
+                }}
+                state={eventPreview.id}
+              >
+                <EventPreview key={eventPreview.id} event={eventPreview} />
+              </Link>
+            ))
           )}
-          {eventPreviews!.map((eventPreview) => (
-            <Link
-              className="event-preview-link"
-              to={{
-                pathname: `/event/${eventPreview.id}`,
-              }}
-              state={eventPreview.id}
-            >
-              <EventPreview key={eventPreview.id} event={eventPreview} />
-            </Link>
-          ))}
         </div>
       </div>
     </>

@@ -17,6 +17,8 @@ import {
 import { ProfileMyEvents } from "../ProfileMyEvents";
 import { checkForTokens } from "../../services/provideTokens";
 import { useNavigate } from "react-router-dom";
+import { ProfilePersonalInformationLoading } from "../loadings/ProfilePersonalInformationLoading";
+import { ProfileTitleIsLoading } from "../loadings/ProfileTitleIsLoading";
 
 const Profile = (props: { onLogout: () => void }) => {
   const [isEditingProfile, setIsEditingProfile] = useState(false);
@@ -38,10 +40,6 @@ const Profile = (props: { onLogout: () => void }) => {
 
   const { data: profileInfo, isLoading, error, mutate } = useProfile(userId!);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   if (error) {
     return <div>Something went wrong...</div>;
   }
@@ -50,14 +48,24 @@ const Profile = (props: { onLogout: () => void }) => {
     <div className="profile-main-holder">
       {!isEditingProfile ? (
         <div className="profile-main-first-column">
-          <ProfileHead
-            profileInformation={profileInfo!}
-            className="profile-head"
-          />
-          <PorfileMyInformation
-            profileInformation={profileInfo!}
-            className="profile-myinfos"
-          />
+          {isLoading ? (
+            <ProfileTitleIsLoading />
+          ) : (
+            <ProfileHead
+              profileInformation={profileInfo!}
+              className="profile-head"
+            />
+          )}
+
+          {isLoading ? (
+            <ProfilePersonalInformationLoading />
+          ) : (
+            <PorfileMyInformation
+              profileInformation={profileInfo!}
+              className="profile-myinfos"
+            />
+          )}
+
           {organizerId ? (
             <ProfileMyEvents
               className="profile-myevents"
