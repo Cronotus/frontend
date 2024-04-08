@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/notfound.css";
-import NotFoundImage from "../../../public/assets/images/undraw_page_not_found_re_e9o6.svg";
+import NotFoundImage from "/assets/images/undraw_page_not_found_re_e9o6.svg";
 import { Button } from "@mui/material";
 
 const NoMatch = () => {
