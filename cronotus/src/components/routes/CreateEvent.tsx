@@ -16,7 +16,6 @@ import dayjs, { Dayjs } from "dayjs";
 import { eventCreationSchema } from "../../services/logic/validation";
 import { createEventFetch } from "../../services/api/events";
 import { getOrganizerIdFromToken } from "../../services/logic/getOrganizerIdFromToken";
-import { getNewTokens } from "../../services/logic/getNewTokens";
 
 export const CreateEvent = () => {
   const navigate = useNavigate();
@@ -36,8 +35,6 @@ export const CreateEvent = () => {
     },
     onSubmit: async (values) => {
       const { organizerId } = await getOrganizerIdFromToken();
-      await getNewTokens();
-
       values.organizerId = organizerId;
 
       createEventFetch(values)

@@ -22,6 +22,7 @@ import { ProfileTitleIsLoading } from "../loadings/ProfileTitleIsLoading";
 import { ProfilePictures } from "../ProfilePictures";
 import { CoverImageFullscreenModalContent } from "../CoverImageFullscreenModalContent";
 import { ProfilePictureFullscreenModalContent } from "../ProfilePictureFullscreenModalContent";
+import { ProfileEditImages } from "../ProfileEditImages";
 
 const Profile = (props: { onLogout: () => void }) => {
   const [isEditingProfile, setIsEditingProfile] = useState(false);
@@ -128,6 +129,11 @@ const Profile = (props: { onLogout: () => void }) => {
               prevValues={profileInfo!}
               profileIsEditing={isEditingProfile}
               setProfileIsEditing={setIsEditingProfile}
+            />
+            <ProfileEditImages
+              swrMutate={mutate()}
+              setProfileIsEditing={setIsEditingProfile}
+              profileInfo={profileInfo!}
             />
           </div>
         )}

@@ -4,8 +4,6 @@ import { CustomJwtPayload } from "../../interfaces/CustomJwtPayload";
 import { checkIfOrganizer } from "./checkIfOrganizer";
 import { createOrganizerFetch } from "../api/organizer";
 import { OrganizerInformation } from "../../interfaces/in/OrganizerInformation";
-import { tokenRefreshFetch } from "../api/token";
-import { TokenDto } from "../../interfaces/in/TokenDto";
 
 export const getOrganizerIdFromToken = (): Promise<{ organizerId: string }> => {
   return new Promise((resolve, reject) => {

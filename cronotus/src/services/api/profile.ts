@@ -9,6 +9,11 @@ export const useProfile = (id: string) => {
   return useFetchWithSwr<ProfileInformation>(url);
 };
 
+export const useProfileByOrganizerId = (organizerId: string) => {
+  const url = `${apiEndpoints.profile}/organizer/${organizerId}`;
+  return useFetchWithSwr<ProfileInformation>(url);
+};
+
 export const updateProfileFetch = (
   id: string,
   data: {
@@ -27,6 +32,16 @@ export const deleteProfileFetch = (id: string) => {
 export const useProfileEvents = (organizerId: string) => {
   const url = `${apiEndpoints.organizer}/${organizerId}/events`;
   return useFetchWithSwr<EventForPreview[]>(url);
+};
+
+export const deleteProfileCoverImageFetch = (userId: string) => {
+  const url = `${apiEndpoints.profile}/${userId}/delete-cover`;
+  return fetchDelete(url);
+};
+
+export const deleteProfilePictureFetch = (userId: string) => {
+  const url = `${apiEndpoints.profile}/${userId}/delete-picture`;
+  return fetchDelete(url);
 };
 
 export default useProfile;

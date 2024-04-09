@@ -3,7 +3,7 @@ import { TokenWithExpiration } from "../interfaces/CustomJwtPayload";
 import { TokenDto } from "../interfaces/in/TokenDto";
 import { tokenRefreshFetch } from "./api/token";
 
-export function checkForTokens(): {
+export function   checkForTokens(): {
   accessToken: string | TokenWithExpiration;
 } {
   let accessToken: TokenWithExpiration | string = localStorage.getItem(

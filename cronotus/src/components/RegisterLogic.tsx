@@ -8,6 +8,7 @@ import { registrationSchema } from "../services/logic/validation";
 import { registerFetch } from "../services/api/register";
 import { useNavigate } from "react-router-dom";
 import { registrationSequenceBlockButtonStyles } from "../styles/registerStyles";
+import { createOrganizerFetch } from "../services/api/organizer";
 
 const RegisterLogic = () => {
   const [registrationSequence, setRegistrationSequence] = useState<number>(0);
