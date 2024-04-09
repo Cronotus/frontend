@@ -12,6 +12,8 @@ import Groups3OutlinedIcon from "@mui/icons-material/Groups3Outlined";
 import EmojiPeopleOutlinedIcon from "@mui/icons-material/EmojiPeopleOutlined";
 import Person4Icon from "@mui/icons-material/Person4";
 import CloseIcon from "@mui/icons-material/Close";
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import { useState } from "react";
 import { Modal } from "@mui/material";
 import { useProfileByOrganizerId } from "../../services/api/profile";
@@ -148,6 +150,23 @@ export const SportsEvent = () => {
                   setEventOrganizerProfilePictureModalVisible
                 }
               />
+
+              <div className="event-organizer-info-name">
+                <Person4Icon sx={{ marginRight: "1vh" }} />
+                <h3>
+                  {eventOrganizerData?.firstName}&nbsp;
+                  {eventOrganizerData?.lastName}, also known as{" "}
+                  {eventOrganizerData?.userName}
+                </h3>
+              </div>
+              <div className="event-organizer-info-name">
+                <AlternateEmailIcon sx={{ marginRight: "1vh" }} />
+                <h3>{eventOrganizerData?.email}</h3>
+              </div>
+              <div className="event-organizer-info-name">
+                <LocalPhoneIcon sx={{ marginRight: "1vh" }} />
+                <h3>{eventOrganizerData?.phoneNumber}</h3>
+              </div>
             </div>
           </div>
         </>

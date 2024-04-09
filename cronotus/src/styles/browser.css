@@ -234,3 +234,11 @@
   padding: 2%;
   margin: 1%;
 }
+
+.event-organizer-info-name {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: center;
+}
