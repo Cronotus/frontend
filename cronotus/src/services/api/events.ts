@@ -1,8 +1,9 @@
 import { EventForDetail } from "../../interfaces/in/EventForDetail";
 import { EventForPreview } from "../../interfaces/in/EventForPreview";
+import { EventPictureForReturn } from "../../interfaces/in/EventPictureForReturn";
 import { EventForCreationDto } from "../../interfaces/out/EventForCreationDto";
 import { apiEndpoints } from "../apiEndpoints";
-import { fetchPost } from "../fetchWithMethod";
+import { fetchDelete, fetchPost } from "../fetchWithMethod";
 import useFetchWithSwr from "../useFetchWithSwr";
 
 export const useEventPreviews = () => {
@@ -19,3 +20,18 @@ export const createEventFetch = (data: EventForCreationDto) => {
   const url = `${apiEndpoints.events}`;
   return fetchPost(url, data);
 };
+
+export const deleteEventFetch = (id: string) => {
+  const url = `${apiEndpoints.events}/${id}`;
+  return fetchDelete(url);
+};
+
+export const useEventPictures = (eventId: string) => {
+  const url = `${apiEndpoints.events}/${eventId}/pictures`;
+  return useFetchWithSwr<EventPictureForReturn[]>(url);
+};
+
+export const deltePictureForEventFetch = (props: {eventId: string, pictureId: string}) => {
+  const url = `${apiEndpoints.events}/${props.eventId}/picture/${props.pictureId}`;
+  return fetchDelete(url);
+}
