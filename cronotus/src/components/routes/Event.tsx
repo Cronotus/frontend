@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   deleteEventFetch,
   deltePictureForEventFetch,
+  useCheckIfPlayerIsSignedUp,
   useEventDetail,
   useEventPictures,
 } from "../../services/api/events";
@@ -36,6 +37,12 @@ import { getOrganizerId } from "../../services/logic/getOrganizerId";
 import { EventPictureForReturn } from "../../interfaces/in/EventPictureForReturn";
 import { VisuallyHiddenInput } from "../ProfileEditImages";
 import { uploadPicturesForEventFetch } from "../../services/uploadPicturesForEventFetch";
+import { getPlayerId } from "../../services/logic/getPlayerId";
+import { ClearIcon } from "@mui/x-date-pickers";
+import {
+  registerPlayerToEvent,
+  resignPlayerFromEvent,
+} from "../../services/api/player";
 
 export const SportsEvent = () => {
   const [eventOrganizerInfoModalVisible, setEventOrganizerInfoModalVisible] =
@@ -59,7 +66,13 @@ export const SportsEvent = () => {
 
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data: eventData, isLoading, error } = useEventDetail(id!);
+  const userPlayerId = getPlayerId();
+  const {
+    data: eventData,
+    isLoading,
+    error,
+    mutate: eventDataMutate,
+  } = useEventDetail(id!);
   const {
     data: eventOrganizerData,
     isLoading: organizerIsLoading,
@@ -71,6 +84,12 @@ export const SportsEvent = () => {
     mutate: eventPicturesMutate,
     error: eventPicturesError,
   } = useEventPictures(id!);
+  const {
+    data: playerIsSignedUpToEventData,
+    isLoading: playerIsSignedUpToEventIsLoading,
+    error: playerIsSignedUpToEventError,
+    mutate: playerIsSignedUpToEventMutate,
+  } = useCheckIfPlayerIsSignedUp({ eventId: id!, playerId: userPlayerId });
 
   const userOrganizerId = getOrganizerId();
 
@@ -117,6 +136,10 @@ export const SportsEvent = () => {
   }
 
   if (eventPicturesError) {
+    return <div>Something went wrong...</div>;
+  }
+
+  if (playerIsSignedUpToEventError) {
     return <div>Something went wrong...</div>;
   }
 
@@ -303,6 +326,54 @@ export const SportsEvent = () => {
             </div>
           </div>
         )}
+
+        <div className="events-signup-box">
+          {playerIsSignedUpToEventData?.isSignedUp === false ? (
+            <Button
+              className="events-modify-for-owner-edit-button"
+              type="submit"
+              startIcon={<CheckIcon />}
+              onClick={() => {
+                registerPlayerToEvent(eventData!.id, userPlayerId)
+                  .then(() => playerIsSignedUpToEventMutate())
+                  .then(() => eventDataMutate())
+                  .catch(() => alert("Could not sign up to event"));
+              }}
+              sx={{
+                ":hover": { backgroundColor: "#82CD47", color: "white" },
+                backgroundColor: "#2f2e41",
+                borderRadius: "5px",
+                fontSize: "0.9rem",
+                color: "white",
+                display: "flex",
+              }}
+            >
+              Sign me up to this event!
+            </Button>
+          ) : (
+            <Button
+              className="events-modify-for-owner-edit-button"
+              type="submit"
+              startIcon={<ClearIcon />}
+              onClick={() => {
+                resignPlayerFromEvent(id!, userPlayerId)
+                  .then(() => playerIsSignedUpToEventMutate())
+                  .then(() => eventDataMutate())
+                  .catch((err) => console.log(err));
+              }}
+              sx={{
+                ":hover": { backgroundColor: "#e72929", color: "white" },
+                backgroundColor: "#2f2e41",
+                borderRadius: "5px",
+                fontSize: "0.9rem",
+                color: "white",
+                display: "flex",
+              }}
+            >
+              Resign me from this event
+            </Button>
+          )}
+        </div>
 
         {userOrganizerId === eventData?.organizerId ? (
           <div className="events-modify-for-owner-holder-div">

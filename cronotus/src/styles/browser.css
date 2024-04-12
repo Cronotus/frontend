@@ -130,10 +130,10 @@
   padding-top: 0.8%;
   padding-bottom: 1%;
   display: flex;
-  flex-direction: column;
-  flex-flow: column;
+  flex-direction: row;
+  flex-flow: row;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   padding-left: 1%;
   padding-right: 1%;
 }
@@ -435,4 +435,7 @@
   border-radius: 10px;
   margin-right: 1%;
   transition: filter 0.3s ease;
+}
+
+.event-join-resign-holder-div {
 }

@@ -1,6 +1,7 @@
 import { EventForDetail } from "../../interfaces/in/EventForDetail";
 import { EventForPreview } from "../../interfaces/in/EventForPreview";
 import { EventPictureForReturn } from "../../interfaces/in/EventPictureForReturn";
+import { PlayerSignedUpToEventFlag } from "../../interfaces/in/PlayerSignedUpToEventFlag";
 import { EventForCreationDto } from "../../interfaces/out/EventForCreationDto";
 import { apiEndpoints } from "../apiEndpoints";
 import { fetchDelete, fetchPost } from "../fetchWithMethod";
@@ -34,4 +35,9 @@ export const useEventPictures = (eventId: string) => {
 export const deltePictureForEventFetch = (props: {eventId: string, pictureId: string}) => {
   const url = `${apiEndpoints.events}/${props.eventId}/picture/${props.pictureId}`;
   return fetchDelete(url);
+}
+
+export const useCheckIfPlayerIsSignedUp = (props: {eventId: string, playerId: string}) => {
+  const url = `${apiEndpoints.events}/${props.eventId}/check/${props.playerId}`;
+  return useFetchWithSwr<PlayerSignedUpToEventFlag>(url);
 }
