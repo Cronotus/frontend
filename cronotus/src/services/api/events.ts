@@ -6,10 +6,11 @@ import { EventForCreationDto } from "../../interfaces/out/EventForCreationDto";
 import { apiEndpoints } from "../apiEndpoints";
 import { fetchDelete, fetchPost } from "../fetchWithMethod";
 import useFetchWithSwr from "../useFetchWithSwr";
+import { useFetchWithSwrForEvents } from "../useFetchWithSwrForEvents";
 
-export const useEventPreviews = () => {
-  const url = `${apiEndpoints.events}`;
-  return useFetchWithSwr<EventForPreview[]>(url);
+export const  useEventPreviews = (pageNumber: number) => {
+  const url = `${apiEndpoints.events}?pageSize=5&pageNumber=${pageNumber}`;
+  return useFetchWithSwrForEvents<EventForPreview[]>(url);
 };
 
 export const useEventDetail = (id: string) => {
@@ -32,12 +33,18 @@ export const useEventPictures = (eventId: string) => {
   return useFetchWithSwr<EventPictureForReturn[]>(url);
 };
 
-export const deltePictureForEventFetch = (props: {eventId: string, pictureId: string}) => {
+export const deltePictureForEventFetch = (props: {
+  eventId: string;
+  pictureId: string;
+}) => {
   const url = `${apiEndpoints.events}/${props.eventId}/picture/${props.pictureId}`;
   return fetchDelete(url);
-}
+};
 
-export const useCheckIfPlayerIsSignedUp = (props: {eventId: string, playerId: string}) => {
+export const useCheckIfPlayerIsSignedUp = (props: {
+  eventId: string;
+  playerId: string;
+}) => {
   const url = `${apiEndpoints.events}/${props.eventId}/check/${props.playerId}`;
   return useFetchWithSwr<PlayerSignedUpToEventFlag>(url);
-}
+};

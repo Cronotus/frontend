@@ -439,3 +439,12 @@
 
 .event-join-resign-holder-div {
 }
+
+.pagination-container {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

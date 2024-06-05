@@ -3,9 +3,18 @@ import { EventPreview } from "../EventPreview";
 import { useEventPreviews } from "../../services/api/events";
 import { Link } from "react-router-dom";
 import { EventPreviewLoading } from "../loadings/EventPreviewLoading";
+import { Pagination } from "../../interfaces/Pagination";
+import { Pagination as MUIPagination } from "@mui/material";
+import { useState } from "react";
 
 const Browser = () => {
-  const { data: eventPreviews, isLoading, error } = useEventPreviews();
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const {
+    data: eventPreviews,
+    isLoading,
+    error,
+    paginationHeaders,
+  } = useEventPreviews(currentPage);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -14,6 +23,17 @@ const Browser = () => {
   if (error) {
     return <div>Something went wrong...</div>;
   }
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setCurrentPage(value);
+  };
+
+  const parsedPaginationHeaders: Pagination = paginationHeaders
+    ? JSON.parse(paginationHeaders)
+    : null;
 
   return (
     <>
@@ -54,6 +74,17 @@ const Browser = () => {
               </Link>
             ))
           )}
+        </div>
+        <div className="pagination-container">
+          <MUIPagination
+            count={parsedPaginationHeaders.TotalPages}
+            variant="outlined"
+            shape="rounded"
+            color="secondary"
+            siblingCount={2}
+            onChange={handlePageChange}
+            page={parsedPaginationHeaders.CurrentPage}
+          />
         </div>
       </div>
     </>

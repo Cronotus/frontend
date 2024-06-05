@@ -350,7 +350,7 @@ export const SportsEvent = () => {
             >
               Sign me up to this event!
             </Button>
-          ) : (
+          ) : ( 
             <Button
               className="events-modify-for-owner-edit-button"
               type="submit"
@@ -378,7 +378,7 @@ export const SportsEvent = () => {
         {userOrganizerId === eventData?.organizerId ? (
           <div className="events-modify-for-owner-holder-div">
             <h3>Modify your event</h3>
-            <Button
+            {/* <Button
               className="events-modify-for-owner-edit-button"
               type="submit"
               startIcon={<EditIcon />}
@@ -394,7 +394,7 @@ export const SportsEvent = () => {
               }}
             >
               Change event details
-            </Button>
+            </Button> */}
             <label htmlFor="add-some-images-tag">
               <Button
                 className="events-modify-for-owner-edit-button"
