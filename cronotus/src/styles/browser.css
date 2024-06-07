@@ -445,6 +445,55 @@
   flex-direction: row;
   flex-flow: row;
   justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.filtering-container {
+  display: flex;
+  flex-direction: column;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 98%;
+  background-color: #f0f0f0;
+  height: 20%;
+  border-radius: 20px;
+  padding-left: 1%;
+  padding-right: 1%;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.filtering-container-header {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f0f0f0;
+  margin-top: 1%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  width: 98%;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+.filtering-container-title {
+  margin-bottom: 1%;
+}
+
+.filterin-container-holder {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row;
+  justify-content: space-evenly;
   align-items: center;
   width: 100%;
+  margin-bottom: 1%;
+}
+
+.not-visible-div {
+  display: none;
 }

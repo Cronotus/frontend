@@ -8,8 +8,21 @@ import { fetchDelete, fetchPost } from "../fetchWithMethod";
 import useFetchWithSwr from "../useFetchWithSwr";
 import { useFetchWithSwrForEvents } from "../useFetchWithSwrForEvents";
 
-export const  useEventPreviews = (pageNumber: number) => {
-  const url = `${apiEndpoints.events}?pageSize=5&pageNumber=${pageNumber}`;
+export const useEventPreviews = (
+  pageNumber: number,
+  filters: {
+    startDate: Date | null;
+    endDate: Date | null;
+    sportId: string | null;
+  }
+) => {
+  const { startDate, endDate, sportId } = filters;
+  const startDateFilter = startDate
+    ? `&startDate=${startDate.toISOString()}`
+    : "";
+  const endDateFilter = endDate ? `&endDate=${endDate.toISOString()}` : "";
+  const sportIdFilter = sportId ? `&sportId=${sportId}` : "";
+  const url = `${apiEndpoints.events}?pageSize=5&pageNumber=${pageNumber}${startDateFilter}${endDateFilter}${sportIdFilter}`;
   return useFetchWithSwrForEvents<EventForPreview[]>(url);
 };
 
