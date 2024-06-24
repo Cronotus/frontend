@@ -4,4 +4,6 @@ export interface ProfileInformation {
   userName: string;
   email: string;
   phoneNumber: string;
+  profilePicture: string;
+  profileCoverImage: string;
 }

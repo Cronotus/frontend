@@ -8,7 +8,7 @@ const PorfileMyInformation = (props: {
 }) => {
   return (
     <div className={props.className}>
-      <h3>Personal information</h3>
+      <h2>Personal information</h2>
       <ProfileBodyInfoBox
         className="profile-infobox-holder"
         text="First Name"

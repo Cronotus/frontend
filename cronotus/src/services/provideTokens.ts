@@ -3,7 +3,7 @@ import { TokenWithExpiration } from "../interfaces/CustomJwtPayload";
 import { TokenDto } from "../interfaces/in/TokenDto";
 import { tokenRefreshFetch } from "./api/token";
 
-export function checkForTokens(): {
+export function   checkForTokens(): {
   accessToken: string | TokenWithExpiration;
 } {
   let accessToken: TokenWithExpiration | string = localStorage.getItem(
@@ -29,10 +29,14 @@ export function checkForTokens(): {
       localStorage.setItem("accessToken", tokenDto.accessToken);
       localStorage.setItem("refreshToken", tokenDto.refreshToken);
       accessToken = tokenDto.accessToken;
+
+      console.log(`New set of tokens has been set`);
     })
-    .catch((error) => {
-      console.log(`An error occurred in fetchWithMethod: ${error}`);
-      throw error;
+    .catch(() => {
+      console.log(`Could not set new set of tokens`);
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      window.location.href = "/";
     });
 
   return {
@@ -43,7 +47,6 @@ export function checkForTokens(): {
 function isTokenValid(token: string): boolean {
   const decodedToken = jwtDecode(token) as TokenWithExpiration;
   const exp = decodedToken.exp;
-  console.log(exp);
 
   const tokenTime = new Date(exp * 1000);
   const currentTime = new Date();
